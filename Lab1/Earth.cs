@@ -8,20 +8,33 @@ namespace Lab1
         public void Life()
         {
             Worm worm = new Worm();
-            for (int i = 0; i < DAYS; i++)
+            worm.OpenFile();
+            worm.Nothing();
+            for (int i = 0; i < 5; i++)
             {
-                int[] position = worm.Position;
-                switch (position[0], position[1])
-                {
-                    
-                    
-                }
-                
+                worm.MoveToUp();
             }
-            int[] end = worm.Position;
-            Console.WriteLine("Worms: [" + worm.Name + "(" + end[0] + "," + end[1] + ")]");
-            end = worm.moveToRight();
-            Console.WriteLine("Worms: [" + worm.Name + "(" + end[0] + "," + end[1] + ")]");
+            for (int i = 0; i < 5; i++)
+            {
+                worm.MoveToRight();
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                worm.MoveToDown();
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                worm.MoveToLeft();
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                worm.MoveToUp();
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                worm.MoveToRight();
+            }
+            worm.CloseFile();
         }
     }
 }
