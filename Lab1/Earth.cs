@@ -4,7 +4,6 @@ namespace Lab1
 {
     public class Earth
     {
-        private const int DAYS = 100;
         public void Life()
         {
             Worm worm = new Worm();

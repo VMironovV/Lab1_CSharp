@@ -38,6 +38,7 @@ namespace Lab1
         {
             _name = "John";
             _position = new int[2] {0, 0};
+            
         }
 
         public int[] MoveToRight()
@@ -84,7 +85,7 @@ namespace Lab1
 
         public void OpenFile()
         {
-            _file = new StreamWriter("C:/Users/Vladimir/RiderProjects/Lab1_CSharp/Lab1/coordinates.txt", false);
+            _file = new StreamWriter("C:/Users/Vladimir/RiderProjects/Lab1_CSharp/Lab1/coordinates" + _name + ".txt", false);
         }
         public void CloseFile()
         {
