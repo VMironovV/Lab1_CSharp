@@ -6,8 +6,21 @@ namespace Lab1
     public class Worm
     {
         private string _name;
-        private int[] _position;
+        private Coordinates _position;
         private StreamWriter _file;
+        private int _vitality;
+
+        public int Vitality
+        {
+            get
+            {
+                return _vitality;
+            }
+            set
+            {
+                _vitality = value;
+            }
+        }
         
         public string Name
         {
@@ -21,7 +34,7 @@ namespace Lab1
             }
             
         }
-        public int[] Position
+        public Coordinates Position
         {
             get
             {
@@ -37,37 +50,40 @@ namespace Lab1
         public Worm()
         {
             _name = "John";
-            _position = new int[2] {0, 0};
-            
+            _position = new Coordinates();
+            _position.X = 0;
+            _position.Y = 0;
+            _vitality = 20;
+
         }
 
-        public int[] MoveToRight()
+        public Coordinates MoveToRight()
         {
-            _position[0] = _position[0] + 1;
+            _position.X = _position.X + 1;
             WriteCoordinatesToFile();
             return _position;
         }
         
-        public int[] MoveToLeft()
+        public Coordinates MoveToLeft()
         {
-            _position[0] = _position[0] - 1;
+            _position.X = _position.X - 1;
             WriteCoordinatesToFile();
             return _position;
         }
-        public int[] MoveToUp()
+        public Coordinates MoveToUp()
         {
-            _position[1] = _position[1] + 1;
+            _position.Y = _position.Y + 1;
             WriteCoordinatesToFile();
             return _position;
         }
-        public int[] MoveToDown()
+        public Coordinates MoveToDown()
         {
-            _position[1] = _position[1] - 1;
+            _position.Y = _position.Y - 1;
             WriteCoordinatesToFile();
             return _position;
         }
         
-        public int[] Nothing()
+        public Coordinates Nothing()
         {
             WriteCoordinatesToFile();
             return _position;
@@ -75,12 +91,12 @@ namespace Lab1
 
         public void WriteCoordinatesToConsole()
         {
-            Console.WriteLine("Worms:[" + _name + "(" + _position[0] + "," + _position[1] + ")]");
+            Console.WriteLine("Worms:[" + _name + "(" + _position.X + "," + _position.Y + ")]");
         }
         
         public void WriteCoordinatesToFile()
         {
-            _file.WriteLine("Worms:[" + _name + "(" + _position[0] + "," + _position[1] + ")]");
+            _file.WriteLine("Worms:[" + _name + "(" + _position.X + "," + _position.Y + ")]");
         }
 
         public void OpenFile()
