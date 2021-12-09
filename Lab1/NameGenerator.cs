@@ -2,9 +2,9 @@ using System;
 
 namespace Lab1
 {
-    public static class NameGenerator
+    public class NameGenerator
     {
-        public static string GenerateName(int len)
+        public string GenerateName(int len)
         { 
             Random r = new Random();
             string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "l", "n", "p", "q", "r", "s", "sh", "zh", "t", "v", "w", "x" };

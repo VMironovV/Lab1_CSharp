@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace Lab1
 {
-    public static class FoodGenerator
+    public class FoodGenerator
     {
-        public static void GenerateFood(List<Worm> worms)
+        public void GenerateFood(List<Worm> worms)
         {
             Coordinates coordinates;
             do
@@ -15,7 +15,7 @@ namespace Lab1
             PositionSelection(coordinates.X, coordinates.Y);
         }
 
-        public static Coordinates GenerateCoordinates()
+        public Coordinates GenerateCoordinates()
         {
             Coordinates coordinates = new Coordinates();
             coordinates.X = NormalDistribution.NextNormal();
@@ -23,7 +23,7 @@ namespace Lab1
             return coordinates;
         }
         
-        public static void PositionSelection(int x, int y)
+        public void PositionSelection(int x, int y)
         {
             int end = Food.PositionArray.Count;
             for (int i = end - 1; i > -1; i--)
@@ -56,7 +56,7 @@ namespace Lab1
             }
         }
         
-        public static bool CoordinatesCheck(List<Worm> worms, int x, int y)
+        public bool CoordinatesCheck(List<Worm> worms, int x, int y)
         {
             for (int i = 0; i < worms.Count; i++)
             {

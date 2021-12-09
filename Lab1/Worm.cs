@@ -9,6 +9,13 @@ namespace Lab1
         private string _name;
         private Coordinates _position;
         private int _vitality;
+        private FileWriter _fileWriter;
+
+        public FileWriter FileWriter
+        {
+            get => _fileWriter;
+            set => _fileWriter = value;
+        }
 
         public int Vitality
         {
@@ -47,55 +54,59 @@ namespace Lab1
             
         }
         
-        public Worm()
+        public Worm(FileWriter fileWriter)
         {
-            _name = NameGenerator.GenerateName(6);
+            NameGenerator nameGenerator = new NameGenerator();
+            _name = nameGenerator.GenerateName(6);
             _position = new Coordinates();
             _position.X = 0;
             _position.Y = 0;
             _vitality = 10;
+            this._fileWriter = fileWriter;
 
         }
         
-        public Worm(int x, int y)
+        public Worm(FileWriter fileWriter, int x, int y)
         {
-            _name = NameGenerator.GenerateName(6);
+            NameGenerator nameGenerator = new NameGenerator();
+            _name = nameGenerator.GenerateName(6);
             _position = new Coordinates();
             _position.X = x;
             _position.Y = y;
             _vitality = 10;
+            this._fileWriter = fileWriter;
 
         }
 
         public Coordinates MoveToRight()
         {
             _position.X = _position.X + 1;
-            FileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
+            _fileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
             return _position;
         }
         
         public Coordinates MoveToLeft()
         {
             _position.X = _position.X - 1;
-            FileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
+            _fileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
             return _position;
         }
         public Coordinates MoveToUp()
         {
             _position.Y = _position.Y + 1;
-            FileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
+            _fileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
             return _position;
         }
         public Coordinates MoveToDown()
         {
             _position.Y = _position.Y - 1;
-            FileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
+            _fileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
             return _position;
         }
         
         public Coordinates Nothing()
         {
-            FileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
+            _fileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
             return _position;
         }
 

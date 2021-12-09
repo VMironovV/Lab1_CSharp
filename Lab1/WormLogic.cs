@@ -2,9 +2,9 @@ using System.Collections.Generic;
 
 namespace Lab1
 {
-    public static class WormLogic
+    public class WormLogic
     {
-        public static void WormAction(List<Worm> worms, Worm worm)
+        public void WormAction(List<Worm> worms, Worm worm)
         {
             if (worm.Vitality > 15)
             {
@@ -19,7 +19,7 @@ namespace Lab1
             }
         }
 
-        public static void MoveWormToFood(List<Worm> worms, Worm worm, Coordinates foodCoordinates)
+        public void MoveWormToFood(List<Worm> worms, Worm worm, Coordinates foodCoordinates)
         {
             if (worm.Position.X == foodCoordinates.X && worm.Position.Y == foodCoordinates.Y)
             {
@@ -56,7 +56,7 @@ namespace Lab1
             }
         }
 
-        public static void BirthWormNear(List<Worm> worms, Worm worm)
+        public void BirthWormNear(List<Worm> worms, Worm worm)
         {
             if(CoordinatesCheck(worms,worm.Position.X + 1, worm.Position.Y))
             {
@@ -73,7 +73,7 @@ namespace Lab1
             }
         }
 
-        public static bool CoordinatesCheck(List<Worm> worms, int x, int y)
+        public bool CoordinatesCheck(List<Worm> worms, int x, int y)
         {
             for (int i = 0; i < worms.Count; i++)
             {
@@ -94,7 +94,7 @@ namespace Lab1
             return true;
         }
         
-        public static bool WormsCoordinatesCheck(List<Worm> worms, int x, int y)
+        public bool WormsCoordinatesCheck(List<Worm> worms, int x, int y)
         {
             for (int i = 0; i < worms.Count; i++)
             {
@@ -107,14 +107,14 @@ namespace Lab1
             return true;
         }
         
-        public static void BirthWorm(List<Worm> worms, Worm worm, int x, int y)
+        public void BirthWorm(List<Worm> worms, Worm worm, int x, int y)
         {
-            Worm newWorm = new Worm(x, y);
+            Worm newWorm = new Worm(worm.FileWriter, x, y);
             worms.Add(newWorm);
             worm.Vitality = worm.Vitality - 10;
         }
 
-        public static void Eat(Worm worm)
+        public void Eat(Worm worm)
         {
             worm.Vitality = worm.Vitality + 10;
             Food.DeleteFood(worm.Position.X, worm.Position.Y);
