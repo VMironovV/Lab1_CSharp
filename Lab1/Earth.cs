@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Lab1
 {
@@ -6,34 +7,28 @@ namespace Lab1
     {
         public void Life()
         {
+            List<Worm> worms = new List<Worm>();
             Worm worm = new Worm();
-            worm.OpenFile();
-            worm.Nothing();
-            for (int i = 0; i < 5; i++)
+            worms.Add(worm);
+            FileWriter.OpenFile();
+            for (int i = 0; i < 100; i++)
             {
-                worm.MoveToUp();
+                FoodGenerator.GenerateFood(worms);
+                for (int a = 0; a < worms.Count; a++)
+                {
+                    WormLogic.WormAction(worms, worms[a]);
+                }
+
+                for (int a = 0; a < worms.Count; a++)
+                {
+                    if (worms[a].Vitality < 1)
+                    {
+                        worms.RemoveAt(a);
+                    }
+                }
             }
-            for (int i = 0; i < 5; i++)
-            {
-                worm.MoveToRight();
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                worm.MoveToDown();
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                worm.MoveToLeft();
-            }
-            for (int i = 0; i < 10; i++)
-            {
-                worm.MoveToUp();
-            }
-            for (int i = 0; i < 5; i++)
-            {
-                worm.MoveToRight();
-            }
-            worm.CloseFile();
+
+            FileWriter.CloseFile();
         }
     }
 }

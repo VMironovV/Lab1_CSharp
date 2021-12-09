@@ -1,13 +1,14 @@
 using System;
+using System.Collections.Generic;
 
 namespace Lab1
 {
-    public class Food
+    public static class Food
     {
-        private Coordinates[] _positionArray = new Coordinates[10] {null, null, null, null, null, null, null, null, null, null};
+        private static List<Coordinates> _positionArray = new List<Coordinates>();
         //private int _numOfArray;
         
-        public Coordinates[] PositionArray
+        public static List<Coordinates> PositionArray
         {
             get
             {
@@ -20,29 +21,27 @@ namespace Lab1
             
         }
 
-        public Coordinates PositionSelection()
+        public static void DeleteFood(int x, int y)
         {
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < _positionArray.Count; i++)
             {
-                _positionArray[i + 1] = _positionArray[i];
+                if(Food.PositionArray[i] != null && _positionArray[i].X == x && _positionArray[i].Y == y)
+                {
+                    _positionArray[i] = null;
+                }
             }
-
-            _positionArray[0].X = NormalDistribution.NextNormal();
-            _positionArray[0].Y = NormalDistribution.NextNormal();
-            
-            return _positionArray[0];
         }
-
-        public void DeleteFood(int numOfArray)
+        
+        public static void DeleteFood(int i)
         {
-            _positionArray[numOfArray] = null;
+            _positionArray.RemoveAt(i);
         }
 
-        public Coordinates NearestPiece(Coordinates position)
+        public static Coordinates NearestPiece(Coordinates position)
         {
             int minDistance = Int32.MaxValue;
             int minDistanceNum = 0;
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < _positionArray.Count; i++)
             {
                 if (_positionArray[i] != null)
                 {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Lab1
@@ -7,7 +8,6 @@ namespace Lab1
     {
         private string _name;
         private Coordinates _position;
-        private StreamWriter _file;
         private int _vitality;
 
         public int Vitality
@@ -49,43 +49,53 @@ namespace Lab1
         
         public Worm()
         {
-            _name = "John";
+            _name = NameGenerator.GenerateName(6);
             _position = new Coordinates();
             _position.X = 0;
             _position.Y = 0;
-            _vitality = 20;
+            _vitality = 10;
+
+        }
+        
+        public Worm(int x, int y)
+        {
+            _name = NameGenerator.GenerateName(6);
+            _position = new Coordinates();
+            _position.X = x;
+            _position.Y = y;
+            _vitality = 10;
 
         }
 
         public Coordinates MoveToRight()
         {
             _position.X = _position.X + 1;
-            WriteCoordinatesToFile();
+            FileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
             return _position;
         }
         
         public Coordinates MoveToLeft()
         {
             _position.X = _position.X - 1;
-            WriteCoordinatesToFile();
+            FileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
             return _position;
         }
         public Coordinates MoveToUp()
         {
             _position.Y = _position.Y + 1;
-            WriteCoordinatesToFile();
+            FileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
             return _position;
         }
         public Coordinates MoveToDown()
         {
             _position.Y = _position.Y - 1;
-            WriteCoordinatesToFile();
+            FileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
             return _position;
         }
         
         public Coordinates Nothing()
         {
-            WriteCoordinatesToFile();
+            FileWriter.WriteCoordinatesToFile(_name, _vitality, _position.X, _position.Y);
             return _position;
         }
 
@@ -93,20 +103,13 @@ namespace Lab1
         {
             Console.WriteLine("Worms:[" + _name + "(" + _position.X + "," + _position.Y + ")]");
         }
-        
-        public void WriteCoordinatesToFile()
+
+        public void EndOfAction()
         {
-            _file.WriteLine("Worms:[" + _name + "(" + _position.X + "," + _position.Y + ")]");
+            _vitality = _vitality - 1;
         }
 
-        public void OpenFile()
-        {
-            _file = new StreamWriter("C:/Users/Vladimir/RiderProjects/Lab1_CSharp/Lab1/coordinates" + _name + ".txt", false);
-        }
-        public void CloseFile()
-        {
-            _file.Close();
-        }
+        
 
         
     }
