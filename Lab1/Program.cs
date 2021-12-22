@@ -35,18 +35,13 @@ namespace Lab1
                 {
 
                     services.AddHostedService<Earth>();
-
-// Служба симулятора мира
+                    
 
                     services.AddScoped<FileWriter>(); 
                     services.AddScoped<NameGenerator>();
                     services.AddScoped<FoodGenerator>();
                     services.AddScoped<WormLogic>();
-
-// Генератор еды
-
-                    // ...
-
+                    
                 });
 
         }

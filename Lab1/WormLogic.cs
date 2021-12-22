@@ -4,11 +4,11 @@ namespace Lab1
 {
     public class WormLogic
     {
-        public void WormAction(List<Worm> worms, Worm worm)
+        public void WormAction(List<Worm> worms, Worm worm, NameGenerator nameGenerator)
         {
             if (worm.Vitality > 15)
             {
-                BirthWormNear(worms, worm);
+                BirthWormNear(worms, worm, nameGenerator);
                 worm.EndOfAction();
             }
             else
@@ -56,20 +56,20 @@ namespace Lab1
             }
         }
 
-        public void BirthWormNear(List<Worm> worms, Worm worm)
+        public void BirthWormNear(List<Worm> worms, Worm worm, NameGenerator nameGenerator)
         {
             if(CoordinatesCheck(worms,worm.Position.X + 1, worm.Position.Y))
             {
-                BirthWorm(worms, worm, worm.Position.X + 1, worm.Position.Y);
+                BirthWorm(worms, worm, worm.Position.X + 1, worm.Position.Y, nameGenerator);
             }else if(CoordinatesCheck(worms,worm.Position.X, worm.Position.Y + 1))
             {
-                BirthWorm(worms, worm, worm.Position.X, worm.Position.Y + 1);
+                BirthWorm(worms, worm, worm.Position.X, worm.Position.Y + 1, nameGenerator);
             }else if(CoordinatesCheck(worms,worm.Position.X - 1, worm.Position.Y))
             {
-                BirthWorm(worms, worm, worm.Position.X - 1, worm.Position.Y);
+                BirthWorm(worms, worm, worm.Position.X - 1, worm.Position.Y, nameGenerator);
             }else if(CoordinatesCheck(worms,worm.Position.X, worm.Position.Y - 1))
             {
-                BirthWorm(worms, worm, worm.Position.X, worm.Position.Y - 1);
+                BirthWorm(worms, worm, worm.Position.X, worm.Position.Y - 1, nameGenerator);
             }
         }
 
@@ -107,9 +107,9 @@ namespace Lab1
             return true;
         }
         
-        public void BirthWorm(List<Worm> worms, Worm worm, int x, int y)
+        public void BirthWorm(List<Worm> worms, Worm worm, int x, int y, NameGenerator nameGenerator)
         {
-            Worm newWorm = new Worm(worm.FileWriter, x, y);
+            Worm newWorm = new Worm(worm.FileWriter, nameGenerator, x, y);
             worms.Add(newWorm);
             worm.Vitality = worm.Vitality - 10;
         }

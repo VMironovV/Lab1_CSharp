@@ -13,7 +13,7 @@ namespace Lab1
 
         public void OpenFile()
         {
-            _file = new StreamWriter("C:/Users/Vladimir/RiderProjects/Lab1_CSharp/Lab1/coordinates.txt", false);
+            _file = new StreamWriter("C:/Users/Vladimir/RiderProjects/Lab1/Lab1/coordinates.txt", false);
         }
         
         public void CloseFile()

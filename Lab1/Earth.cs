@@ -9,21 +9,31 @@ namespace Lab1
 {
     public class Earth : IHostedService
     {
+        private FileWriter _fileWriter;
+        private FoodGenerator _foodGenerator;
+        private WormLogic _wormLogic;
+        private NameGenerator _nameGenerator;
+
+        public Earth(FileWriter fileWriter, FoodGenerator foodGenerator, WormLogic wormLogic, NameGenerator nameGenerator)
+        {
+            _fileWriter = fileWriter;
+            _foodGenerator = foodGenerator;
+            _wormLogic = wormLogic;
+            _nameGenerator = nameGenerator;
+
+        }
         public void Life()
         {
-            FileWriter fileWriter = new FileWriter();
-            FoodGenerator foodGenerator = new FoodGenerator();
-            WormLogic wormLogic = new WormLogic();
             List<Worm> worms = new List<Worm>();
-            Worm worm = new Worm(fileWriter);
+            Worm worm = new Worm(_fileWriter, _nameGenerator);
             worms.Add(worm);
-            fileWriter.OpenFile();
+            _fileWriter.OpenFile();
             for (int i = 0; i < 100; i++)
             {
-                foodGenerator.GenerateFood(worms);
+                _foodGenerator.GenerateFood(worms);
                 for (int a = 0; a < worms.Count; a++)
                 {
-                    wormLogic.WormAction(worms, worms[a]);
+                    _wormLogic.WormAction(worms, worms[a], _nameGenerator);
                 }
 
                 for (int a = 0; a < worms.Count; a++)
@@ -35,7 +45,7 @@ namespace Lab1
                 }
             }
 
-            fileWriter.CloseFile();
+            _fileWriter.CloseFile();
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

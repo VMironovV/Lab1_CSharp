@@ -10,6 +10,7 @@ namespace Lab1
         private Coordinates _position;
         private int _vitality;
         private FileWriter _fileWriter;
+        
 
         public FileWriter FileWriter
         {
@@ -54,9 +55,8 @@ namespace Lab1
             
         }
         
-        public Worm(FileWriter fileWriter)
+        public Worm(FileWriter fileWriter, NameGenerator nameGenerator)
         {
-            NameGenerator nameGenerator = new NameGenerator();
             _name = nameGenerator.GenerateName(6);
             _position = new Coordinates();
             _position.X = 0;
@@ -66,9 +66,8 @@ namespace Lab1
 
         }
         
-        public Worm(FileWriter fileWriter, int x, int y)
+        public Worm(FileWriter fileWriter, NameGenerator nameGenerator, int x, int y)
         {
-            NameGenerator nameGenerator = new NameGenerator();
             _name = nameGenerator.GenerateName(6);
             _position = new Coordinates();
             _position.X = x;
