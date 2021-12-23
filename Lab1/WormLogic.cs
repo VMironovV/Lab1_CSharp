@@ -24,8 +24,9 @@ namespace Lab1
             if (worm.Position.X == foodCoordinates.X && worm.Position.Y == foodCoordinates.Y)
             {
                 Eat(worm);
-                worm.Nothing();
-            }else if(worm.Position.X < foodCoordinates.X && WormsCoordinatesCheck(worms, worm.Position.X + 1, worm.Position.Y))
+            }
+
+            if(worm.Position.X < foodCoordinates.X && WormsCoordinatesCheck(worms, worm.Position.X + 1, worm.Position.Y))
             {
                 worm.MoveToRight();
                 if (worm.Position.X == foodCoordinates.X && worm.Position.Y == foodCoordinates.Y)
@@ -77,7 +78,7 @@ namespace Lab1
         {
             for (int i = 0; i < worms.Count; i++)
             {
-                if (worms[i].Position.X == y && worms[i].Position.Y == y)
+                if (worms[i].Position.X == x && worms[i].Position.Y == y)
                 {
                     return false;
                 }
@@ -98,7 +99,7 @@ namespace Lab1
         {
             for (int i = 0; i < worms.Count; i++)
             {
-                if (worms[i].Position.X == y && worms[i].Position.Y == y)
+                if (worms[i].Position.X == x && worms[i].Position.Y == y)
                 {
                     return false;
                 }

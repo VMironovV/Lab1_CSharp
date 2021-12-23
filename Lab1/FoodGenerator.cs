@@ -4,15 +4,23 @@ namespace Lab1
 {
     public class FoodGenerator
     {
-        public void GenerateFood(List<Worm> worms)
+        public void GenerateFood()
         {
             Coordinates coordinates;
             do
             {
                 coordinates = GenerateCoordinates();
-            } while (CoordinatesCheck(worms, coordinates.X, coordinates.Y));
+            } while (CoordinatesCheck(coordinates.X, coordinates.Y));
 
             PositionSelection(coordinates.X, coordinates.Y);
+        }
+        
+        public void GenerateFood(int x, int y)
+        {
+            if (CoordinatesCheck(x, y))
+            {
+                PositionSelection(x, y);
+            }
         }
 
         public Coordinates GenerateCoordinates()
@@ -56,16 +64,8 @@ namespace Lab1
             }
         }
         
-        public bool CoordinatesCheck(List<Worm> worms, int x, int y)
+        public bool CoordinatesCheck(int x, int y)
         {
-            for (int i = 0; i < worms.Count; i++)
-            {
-                if (worms[i].Position.X == y && worms[i].Position.Y == y)
-                {
-                    return true;
-                }
-            }
-
             for (int i = 0; i < Food.PositionArray.Count; i++)
             {
                 if (Food.PositionArray[i] != null && Food.PositionArray[i].X == x && Food.PositionArray[i].Y == y)

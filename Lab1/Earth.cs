@@ -30,7 +30,7 @@ namespace Lab1
             _fileWriter.OpenFile();
             for (int i = 0; i < 100; i++)
             {
-                _foodGenerator.GenerateFood(worms);
+                _foodGenerator.GenerateFood();
                 for (int a = 0; a < worms.Count; a++)
                 {
                     _wormLogic.WormAction(worms, worms[a], _nameGenerator);
