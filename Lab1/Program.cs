@@ -41,6 +41,7 @@ namespace Lab1
                     services.AddScoped<NameGenerator>();
                     services.AddScoped<FoodGenerator>();
                     services.AddScoped<WormLogic>();
+                    services.AddScoped<Food>();
                     
                 });
 

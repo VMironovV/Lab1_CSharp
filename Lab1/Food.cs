@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace Lab1
 {
-    public static class Food
+    public class Food
     {
-        private static List<Coordinates> _positionArray = new List<Coordinates>();
+        private List<Coordinates> _positionArray = new List<Coordinates>();
         //private int _numOfArray;
         
-        public static List<Coordinates> PositionArray
+        public List<Coordinates> PositionArray
         {
             get
             {
@@ -21,23 +21,23 @@ namespace Lab1
             
         }
 
-        public static void DeleteFood(int x, int y)
+        public void DeleteFood(Food food, int x, int y)
         {
             for (int i = 0; i < _positionArray.Count; i++)
             {
-                if(Food.PositionArray[i] != null && _positionArray[i].X == x && _positionArray[i].Y == y)
+                if(food.PositionArray[i] != null && _positionArray[i].X == x && _positionArray[i].Y == y)
                 {
                     _positionArray[i] = null;
                 }
             }
         }
         
-        public static void DeleteFood(int i)
+        public void DeleteFood(int i)
         {
             _positionArray.RemoveAt(i);
         }
 
-        public static Coordinates NearestPiece(Coordinates position)
+        public Coordinates NearestPiece(Coordinates position)
         {
             int minDistance = Int32.MaxValue;
             int minDistanceNum = 0;

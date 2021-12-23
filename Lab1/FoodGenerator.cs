@@ -4,22 +4,22 @@ namespace Lab1
 {
     public class FoodGenerator
     {
-        public void GenerateFood()
+        public void GenerateFood(Food food)
         {
             Coordinates coordinates;
             do
             {
                 coordinates = GenerateCoordinates();
-            } while (CoordinatesCheck(coordinates.X, coordinates.Y));
+            } while (CoordinatesCheck(food, coordinates.X, coordinates.Y));
 
-            PositionSelection(coordinates.X, coordinates.Y);
+            PositionSelection(food, coordinates.X, coordinates.Y);
         }
         
-        public void GenerateFood(int x, int y)
+        public void GenerateFood(Food food, int x, int y)
         {
-            if (CoordinatesCheck(x, y))
+            if (CoordinatesCheck(food, x, y))
             {
-                PositionSelection(x, y);
+                PositionSelection(food, x, y);
             }
         }
 
@@ -31,44 +31,44 @@ namespace Lab1
             return coordinates;
         }
         
-        public void PositionSelection(int x, int y)
+        public void PositionSelection(Food food, int x, int y)
         {
-            int end = Food.PositionArray.Count;
+            int end = food.PositionArray.Count;
             for (int i = end - 1; i > -1; i--)
             {
                 if (i + 1 == end)
                 {
-                    Food.PositionArray.Add(Food.PositionArray[i]);
+                    food.PositionArray.Add(food.PositionArray[i]);
                 }
                 else
                 {
-                    Food.PositionArray[i + 1] = Food.PositionArray[i];
+                    food.PositionArray[i + 1] = food.PositionArray[i];
                 }
             }
 
-            if (Food.PositionArray.Count > 10)
+            if (food.PositionArray.Count > 10)
             {
-                Food.PositionArray.RemoveAt(10);
+                food.PositionArray.RemoveAt(10);
             }
 
             Coordinates coordinates = new Coordinates();
             coordinates.X = NormalDistribution.NextNormal();
             coordinates.Y = NormalDistribution.NextNormal();
-            if (Food.PositionArray.Count == 0)
+            if (food.PositionArray.Count == 0)
             {
-                Food.PositionArray.Add(coordinates);
+                food.PositionArray.Add(coordinates);
             }
             else
             {
-                Food.PositionArray[0] = coordinates;
+                food.PositionArray[0] = coordinates;
             }
         }
         
-        public bool CoordinatesCheck(int x, int y)
+        public bool CoordinatesCheck(Food food, int x, int y)
         {
-            for (int i = 0; i < Food.PositionArray.Count; i++)
+            for (int i = 0; i < food.PositionArray.Count; i++)
             {
-                if (Food.PositionArray[i] != null && Food.PositionArray[i].X == x && Food.PositionArray[i].Y == y)
+                if (food.PositionArray[i] != null && food.PositionArray[i].X == x && food.PositionArray[i].Y == y)
                 {
                         return true;
                 }

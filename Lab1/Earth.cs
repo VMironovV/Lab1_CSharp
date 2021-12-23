@@ -13,13 +13,15 @@ namespace Lab1
         private FoodGenerator _foodGenerator;
         private WormLogic _wormLogic;
         private NameGenerator _nameGenerator;
+        private Food _food;
 
-        public Earth(FileWriter fileWriter, FoodGenerator foodGenerator, WormLogic wormLogic, NameGenerator nameGenerator)
+        public Earth(FileWriter fileWriter, FoodGenerator foodGenerator, WormLogic wormLogic, NameGenerator nameGenerator, Food food)
         {
             _fileWriter = fileWriter;
             _foodGenerator = foodGenerator;
             _wormLogic = wormLogic;
             _nameGenerator = nameGenerator;
+            _food = food;
 
         }
         public void Life()
@@ -30,10 +32,10 @@ namespace Lab1
             _fileWriter.OpenFile();
             for (int i = 0; i < 100; i++)
             {
-                _foodGenerator.GenerateFood();
+                _foodGenerator.GenerateFood(_food);
                 for (int a = 0; a < worms.Count; a++)
                 {
-                    _wormLogic.WormAction(worms, worms[a], _nameGenerator);
+                    _wormLogic.WormAction(worms, worms[a], _nameGenerator, _food);
                 }
 
                 for (int a = 0; a < worms.Count; a++)

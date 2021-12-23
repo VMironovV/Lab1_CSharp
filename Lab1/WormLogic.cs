@@ -4,26 +4,26 @@ namespace Lab1
 {
     public class WormLogic
     {
-        public void WormAction(List<Worm> worms, Worm worm, NameGenerator nameGenerator)
+        public void WormAction(List<Worm> worms, Worm worm, NameGenerator nameGenerator, Food food)
         {
             if (worm.Vitality > 15)
             {
-                BirthWormNear(worms, worm, nameGenerator);
+                BirthWormNear(worms, worm, nameGenerator, food);
                 worm.EndOfAction();
             }
             else
             {
-                Coordinates foodCoordinates = Food.NearestPiece(worm.Position);
-                MoveWormToFood(worms, worm, foodCoordinates);
+                Coordinates foodCoordinates = food.NearestPiece(worm.Position);
+                MoveWormToFood(worms, worm, foodCoordinates, food);
                 worm.EndOfAction();
             }
         }
 
-        public void MoveWormToFood(List<Worm> worms, Worm worm, Coordinates foodCoordinates)
+        public void MoveWormToFood(List<Worm> worms, Worm worm, Coordinates foodCoordinates, Food food)
         {
             if (worm.Position.X == foodCoordinates.X && worm.Position.Y == foodCoordinates.Y)
             {
-                Eat(worm);
+                Eat(worm, food);
             }
 
             if(worm.Position.X < foodCoordinates.X && WormsCoordinatesCheck(worms, worm.Position.X + 1, worm.Position.Y))
@@ -31,50 +31,50 @@ namespace Lab1
                 worm.MoveToRight();
                 if (worm.Position.X == foodCoordinates.X && worm.Position.Y == foodCoordinates.Y)
                 {
-                    Eat(worm);
+                    Eat(worm, food);
                 }
             }else if(worm.Position.X > foodCoordinates.X && WormsCoordinatesCheck(worms, worm.Position.X - 1, worm.Position.Y))
             {
                 worm.MoveToLeft();
                 if (worm.Position.X == foodCoordinates.X && worm.Position.Y == foodCoordinates.Y)
                 {
-                    Eat(worm);
+                    Eat(worm, food);
                 }
             }else if(worm.Position.Y < foodCoordinates.Y && WormsCoordinatesCheck(worms,worm.Position.X, worm.Position.Y + 1))
             {
                 worm.MoveToUp();
                 if (worm.Position.X == foodCoordinates.X && worm.Position.Y == foodCoordinates.Y)
                 {
-                    Eat(worm);
+                    Eat(worm, food);
                 }
             }else if(worm.Position.Y > foodCoordinates.Y && WormsCoordinatesCheck(worms, worm.Position.X, worm.Position.Y - 1))
             {
                 worm.MoveToDown();
                 if (worm.Position.X == foodCoordinates.X && worm.Position.Y == foodCoordinates.Y)
                 {
-                    Eat(worm);
+                    Eat(worm, food);
                 }
             }
         }
 
-        public void BirthWormNear(List<Worm> worms, Worm worm, NameGenerator nameGenerator)
+        public void BirthWormNear(List<Worm> worms, Worm worm, NameGenerator nameGenerator, Food food)
         {
-            if(CoordinatesCheck(worms,worm.Position.X + 1, worm.Position.Y))
+            if(CoordinatesCheck(worms,worm.Position.X + 1, worm.Position.Y, food))
             {
                 BirthWorm(worms, worm, worm.Position.X + 1, worm.Position.Y, nameGenerator);
-            }else if(CoordinatesCheck(worms,worm.Position.X, worm.Position.Y + 1))
+            }else if(CoordinatesCheck(worms,worm.Position.X, worm.Position.Y + 1, food))
             {
                 BirthWorm(worms, worm, worm.Position.X, worm.Position.Y + 1, nameGenerator);
-            }else if(CoordinatesCheck(worms,worm.Position.X - 1, worm.Position.Y))
+            }else if(CoordinatesCheck(worms,worm.Position.X - 1, worm.Position.Y, food))
             {
                 BirthWorm(worms, worm, worm.Position.X - 1, worm.Position.Y, nameGenerator);
-            }else if(CoordinatesCheck(worms,worm.Position.X, worm.Position.Y - 1))
+            }else if(CoordinatesCheck(worms,worm.Position.X, worm.Position.Y - 1, food))
             {
                 BirthWorm(worms, worm, worm.Position.X, worm.Position.Y - 1, nameGenerator);
             }
         }
 
-        public bool CoordinatesCheck(List<Worm> worms, int x, int y)
+        public bool CoordinatesCheck(List<Worm> worms, int x, int y, Food food)
         {
             for (int i = 0; i < worms.Count; i++)
             {
@@ -84,9 +84,9 @@ namespace Lab1
                 }
             }
 
-            for (int i = 0; i < Food.PositionArray.Count; i++)
+            for (int i = 0; i < food.PositionArray.Count; i++)
             {
-                if (Food.PositionArray[i] != null && Food.PositionArray[i].X == x && Food.PositionArray[i].Y == y)
+                if (food.PositionArray[i] != null && food.PositionArray[i].X == x && food.PositionArray[i].Y == y)
                 {
                     return false;
                 }
@@ -115,10 +115,10 @@ namespace Lab1
             worm.Vitality = worm.Vitality - 10;
         }
 
-        public void Eat(Worm worm)
+        public void Eat(Worm worm, Food food)
         {
             worm.Vitality = worm.Vitality + 10;
-            Food.DeleteFood(worm.Position.X, worm.Position.Y);
+            food.DeleteFood(food, worm.Position.X, worm.Position.Y);
         }
     }
 }
